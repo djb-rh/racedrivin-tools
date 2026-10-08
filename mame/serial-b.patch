@@ -1,0 +1,16 @@
+--- a/src/mame/atari/harddriv.cpp
++++ b/src/mame/atari/harddriv.cpp
+@@ -1504,6 +1595,13 @@ void harddriv_state::driver_nomsp(machine_config &config)
+ 	rs232_port_device &rs232(RS232_PORT(config, "rs232", default_rs232_devices, nullptr));
+ 	rs232.rxd_handler().set("duartn68681", FUNC(mc68681_device::rx_a_w));
+ 
++	// Serial B (J3).  Fitted on every Hard/Race Drivin' board but unused by the stock
++	// games; exposed so a patched program's channel-B traffic can be observed:
++	//     -mainpcb:rs232b null_modem -bitb socket.127.0.0.1:5001   (-bitb2 when the rs232 slot is also filled)
++	m_duartn68681->b_tx_cb().set("rs232b", FUNC(rs232_port_device::write_txd));
++	rs232_port_device &rs232b(RS232_PORT(config, "rs232b", default_rs232_devices, nullptr));
++	rs232b.rxd_handler().set("duartn68681", FUNC(mc68681_device::rx_b_w));
++
+ 	/* video hardware */
+ 	PALETTE(config, m_palette).set_entries(1024);
+ 
