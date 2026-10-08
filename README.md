@@ -14,9 +14,56 @@ Targets are the two Race Drivin' boardsets:
 | Slapstic | 137412-117 at 200K | 137412-117 at 200K |
 | Program | `racedriv` (rev 5) | `racedrivc` (rev 5) |
 
-Python 3.8+ only; no packages to install.  Run everything from this folder.
+## Before you start
+
+You do not need to be a programmer to use these.  Each tool is one command typed into a
+terminal window, and the only software it needs is Python.
+
+**What you need**
+
+- A computer with **Python 3.8 or newer**.  Nothing else is installed: the tools use only
+  what comes with Python, so there is no `pip install` step and no internet access needed
+  once you have the files.
+- **Your own ROM dumps**, as MAME-style zips: `racedriv.zip` (a merged set that also holds
+  the compact ROMs, or the separate `racedrivc.zip` beside its parent) and, for the Stock
+  Car and pod-stream builds, `racedrivpan.zip`.  The tools check the dumps against the
+  known checksums and stop if a file is not the stock one.
+- An **EPROM programmer** and blank chips: 27C512 for the main, ADSP and sound boards,
+  27C010 for the Stock Car DSK pair, 27C040 (150 ns or faster) for ROM stack adapters.
+
+**Which systems**
+
+Plain Python, no platform-specific code, so it should run the same on **macOS, Windows and
+Linux**.  It has only been **tested on macOS**.  If you run it elsewhere and something
+breaks, open an issue with the command and the message.
+
+**Setting up, step by step**
+
+1. Install Python if you do not have it.
+   - macOS: open Terminal and type `python3 --version`.  If it offers to install the
+     command line tools, accept; otherwise get the installer from python.org.
+   - Windows: install from python.org and tick **"Add python.exe to PATH"**.  In the
+     commands below, type `py -3` where they say `python3`.
+   - Linux: `sudo apt install python3` (or your distribution's equivalent); usually already there.
+2. Download this repository: the green **Code** button above, then **Download ZIP**, and
+   unzip it.  No git needed.
+3. Put your ROM zips in the unzipped folder, next to `slapfree.py`.
+4. Open a terminal **in that folder** (macOS: drag the folder onto the Terminal icon, or
+   `cd` to it; Windows: right-click inside the folder, "Open in Terminal").
+5. Type the command for the build you want (next section).  Output goes into a new folder
+   it names (`-o` chooses the name), with a README inside saying which file goes in which
+   socket.
+6. Burn the files that README lists, verify each chip in the programmer, and check the
+   printed byte sum: its low byte matches the last two digits of the Atari part number
+   (`136078-5002` sums to `..02`), which is also what the game's self-test checks.
+
+The "Testing in MAME" section at the end is for people who build MAME from source; it is
+not needed to make or burn a set.
+
 
 ## What you can build
+
+(On Windows, replace `python3` with `py -3` in every command.)
 
 | Build | Boardset | Command | Hardware status |
 |---|---|---|---|
