@@ -51,8 +51,9 @@ breaks, open an issue with the command and the message.
 4. Open a terminal **in that folder** (macOS: drag the folder onto the Terminal icon, or
    `cd` to it; Windows: right-click inside the folder, "Open in Terminal").
 5. Type the command for the build you want (next section).  Output goes into a new folder
-   it names (`-o` chooses the name), with a README inside saying which file goes in which
-   socket.
+   (`-o` chooses the name).  The Stock Car and pod-stream builds put a README in it saying
+   which file goes in which socket; `slapfree.py` names its files by socket
+   (`200R-noslapstic.bin`) and prints the jumper instructions.
 6. Burn the files that README lists, verify each chip in the programmer, and check the
    printed byte sum: its low byte matches the last two digits of the Atari part number
    (`136078-5002` sums to `..02`), which is also what the game's self-test checks.

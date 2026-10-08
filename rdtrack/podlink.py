@@ -316,6 +316,23 @@ def main(argv=None):
             open(os.path.join(args.out, n), "wb").write(data); wrote.append(n)
             if (sum(data) - sum(blobs[n])) & 0xFF:
                 sys.exit("byte sum of %s not preserved" % n)
+    rows = "\n".join("| **%s** | `%s` | 27C512 | `%08X` | `%02X` |" % (n.rsplit(".", 1)[1].upper(), n, zlib.crc32(data) & 0xFFFFFFFF, sum(data) & 0xFF)
+                     for n, data in sorted(sc.unpair(prog, plist).items()) if args.all or data != blobs[n])
+    open(os.path.join(args.out, "README.md"), "w").write("""# Race Drivin' %s with the pod stream on Serial B
+
+Built by `rdtrack.podlink --set %s`.  Burn these and fit them in the sockets named; every
+other main-board EPROM stays as it was.  Byte sums are preserved, so the self-test's ROM
+check still passes.
+
+| Socket | File | Type | CRC32 | Byte sum |
+|---|---|---|---|---|
+%s
+
+The program sends the Panorama side-pod packets (car position and orientation, steering, the
+cars a pod could see, including the other player in a linked race) on **Serial B (J3)** at
+38400 8N1.  Serial A (J2) is untouched, so the machine can still be linked head to head.
+%s""" % (args.set, args.set, rows, "\nThe `*-lane*-27C040.bin` files are the ROM stack adapter images (banks R..Y of each lane).\n" if args.romstack else ""))
+    wrote.append("README.md")
     if args.all:
         open(os.path.join(args.out, "main_image.bin"), "wb").write(bytes(prog))
     if args.romstack:
