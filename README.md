@@ -73,6 +73,8 @@ not needed to make or burn a set.
 | Pod stream on Serial B | cockpit, compact | `python3 -m rdtrack.podlink racedriv.zip racedrivpan.zip -o OUT --set cockpit` (or `--set compact`, or `--pods` on the Stock Car build) | MAME only |
 | ROM stack lane images | any slapstic-free build | add `--romstack` | the Stock Car images run on hardware |
 
+If you leave One ROMs' USB-C cables plugged in on a live board, [these printed caps](https://makerworld.com/en/models/3375604-usb-c-cable-end-caps#profileId-3839856) cover the metal shell.
+
 The Y2K clock fix (Jed Margolin's) is folded into every slapstic-free build.
 
 ### Slapstic-free
@@ -112,6 +114,10 @@ Needs no patch: both programs have the link game built in (operator option GAME 
 TX, RX and ground are needed between cabinets: J2-7, J2-6 and J2-4/5.  Neither program reads
 the handshake or link-present lines outside the self-test.  [docs/linked-play-in-mame.md](docs/linked-play-in-mame.md)
 shows two MAME instances racing each other.
+
+## Bench notes
+
+[docs/multisync-a046901.md](docs/multisync-a046901.md): the MultiSync board's diagnostic LEDs and what each boot failure looks like, self-test expectations for these sets, connector pinouts, the link cable, NVRAM parts and the video rate.
 
 ## Testing in MAME
 
