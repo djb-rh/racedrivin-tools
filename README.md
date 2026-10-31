@@ -115,6 +115,10 @@ TX, RX and ground are needed between cabinets: J2-7, J2-6 and J2-4/5.  Neither p
 the handshake or link-present lines outside the self-test.  [docs/linked-play-in-mame.md](docs/linked-play-in-mame.md)
 shows two MAME instances racing each other.
 
+## Project status
+
+[STATUS.md](STATUS.md) lists everything done, in progress and planned across all the Race Drivin' repositories, with links; `STATUS.bbcode` and `STATUS.html` are the same text for pasting into forums (`python3 tools/forumpost.py STATUS.md` regenerates them).
+
 ## Bench notes
 
 [docs/multisync-a046901.md](docs/multisync-a046901.md): the MultiSync board's diagnostic LEDs and what each boot failure looks like, self-test expectations for these sets, connector pinouts, the link cable, NVRAM parts and the video rate.
